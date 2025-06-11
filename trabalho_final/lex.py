@@ -1,40 +1,52 @@
-def lex(input_string, afd_list):
-    pos = 0
-    tokens = []
+class LexicalAnalyzer:
+    def __init__(self, input_string, afd_list):
+        self.input_string = input_string
+        self.pos = 0
+        self.length = len(input_string)
 
-    while pos < len(input_string):
-        # Descomente para ele identificar espaços e etc
-        if input_string[pos].isspace():
-            pos += 1
-            continue
+        # Detectar se cada item é só AFD (peso implícito pela ordem)
+        self.afds = []
+        for i, item in enumerate(afd_list):
+            if isinstance(item, tuple):
+                afd, peso = item
+            else:
+                afd, peso = item, len(afd_list) - i  # maior peso para o primeiro
+            self.afds.append((afd, peso))
 
-        max_token = None
-        max_length = 0
-        max_weight = -1
-        selected_afd = None
+    def get_next_token(self):
+        while self.pos < self.length:
+            char = self.input_string[self.pos]
+            if char.isspace():
+                self.pos += 1
+                continue
 
-        for i, (afd, peso) in enumerate(afd_list):
-            afd.reset()
-            i_pos = pos
-            last_accept = None
+            max_token = None
+            max_length = 0
+            max_weight = -1
+            selected_afd = None
 
-            while i_pos < len(input_string) and afd.step(input_string[i_pos]):
-                i_pos += 1
-                if afd.is_accepting():
-                    last_accept = i_pos
+            for afd, peso in self.afds:
+                afd.reset()
+                i = self.pos
+                last_accept = None
 
-            length = (last_accept - pos) if last_accept else 0
-            if length > max_length or (length == max_length and peso > max_weight):
+                while i < self.length and afd.step(self.input_string[i]):
+                    i += 1
+                    if afd.is_accepting():
+                        last_accept = i
 
-                max_token = input_string[pos:last_accept]
-                max_length = length
-                max_weight = peso
-                selected_afd = afd
+                length = (last_accept - self.pos) if last_accept else 0
 
-        if max_token is None:
-            raise ValueError(f"Erro léxico na posição {pos}: '{input_string[pos]}'")
+                if length > max_length or (length == max_length and peso > max_weight):
+                    max_token = self.input_string[self.pos:last_accept]
+                    max_length = length
+                    max_weight = peso
+                    selected_afd = afd
 
-        tokens.append((selected_afd.name, max_token))
-        pos += max_length
+            if max_token is None:
+                raise ValueError(f"Erro léxico na posição {self.pos}: '{self.input_string[self.pos]}'")
 
-    return tokens
+            self.pos += max_length
+            return (selected_afd.name, max_token)
+
+        return None  # fim do programa

@@ -1,5 +1,5 @@
 from state_machine import AFD
-from lex import lex
+from lex import LexicalAnalyzer
 
 program = '''
 a = 12 + 34;
@@ -11,9 +11,11 @@ def asdf() {
     if (1 == 1) {
         print("Hello world")
     }
-    
+
     return 12.0032;
 }
+
+float ret = call asdf();
 
 '''
 
@@ -430,21 +432,26 @@ afd_keywords = AFD(
     name="KEYWORD"
 )
 
-
-# A ordem das execuções da maquinas importam
+# IMPORTANTE: A ordem importa!!
 afds = [
-    (afd_keywords, 1),
-    (afd_ident, 1),
-    (afd_blank, 1),
-    (afd_int_constant, 1),
-    (afd_float_constant, 1),
-    (afd_string, 1),
-    (afd_cond_operators, 1),
-    (afd_operators, 1),
-    (afd_separators, 1)
+    afd_keywords,
+    afd_ident,
+    afd_blank,
+    afd_int_constant,
+    afd_float_constant,
+    afd_string,
+    afd_cond_operators,
+    afd_operators,
+    afd_separators
 ]
 
 
 if __name__ == "__main__":
-    tokens = lex(program, afds)
-    print(tokens)
+
+    analyzer = LexicalAnalyzer(program, afds)
+
+    while True:
+        token = analyzer.get_next_token()
+        print(token)
+        if not token:
+            break
