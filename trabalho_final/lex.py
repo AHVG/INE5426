@@ -49,4 +49,4 @@ class LexicalAnalyzer:
             self.pos += max_length
             return (selected_afd.name, max_token)
 
-        return None  # fim do programa
+        return ('EOF', None)  # fim do programa

@@ -2,16 +2,18 @@ from state_machine import AFD
 from lex import LexicalAnalyzer
 
 program = '''
-a = 12 + 34;
+int a = 12 + 34;
 
 def asdf() {
-    float var = 0.23;
+    float var=0.23;
     string other_var = "Um texto qualquer, que tem virgula e ponto e se quiser underline ___. Ja ia esquecendo dos numeros 1234567890";
     
     if (1 == 1) {
         print("Hello world")
+    } else if (5 >= 3.2) {
+        read;
     }
-
+    ident.
     return 12.0032;
 }
 
@@ -22,14 +24,14 @@ float ret = call asdf();
 afd_operators = AFD(
     transitions={
         ('q0', '*'): 'q1',
-        ('q0', '-'): 'q1',
-        ('q0', '+'): 'q1',
-        ('q0', '='): 'q1',
-        ('q0', '/'): 'q1',
-        ('q0', '%'): 'q1',
+        ('q0', '-'): 'q2',
+        ('q0', '+'): 'q3',
+        ('q0', '='): 'q4',
+        ('q0', '/'): 'q5',
+        ('q0', '%'): 'q6',
     },
     start_state='q0',
-    accepting_states={'q1'},
+    accepting_states={'q1', 'q2', 'q3', 'q4', 'q5', 'q6'},
     name="OP"
 )
 
@@ -424,7 +426,7 @@ afd_keywords = AFD(
         ('q0', 'i'): 'q50',
         ('q50', 'f'): 'q51',
 
-        ('q50', 'n'): 'q51',
+        ('q50', 'n'): 'q52',
         ('q52', 't'): 'q53',
     },
     start_state='q0',
@@ -452,6 +454,7 @@ if __name__ == "__main__":
 
     while True:
         token = analyzer.get_next_token()
+
         print(token)
-        if not token:
+        if not token[1]:
             break
