@@ -1,4 +1,0 @@
-
-
-class LexerExcpetion(Exception):
-    pass

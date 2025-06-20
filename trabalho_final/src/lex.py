@@ -1,4 +1,4 @@
-from compiler.excpetions import LexerExcpetion
+from src.excpetions import LexicalExcpetion
 
 
 class Lexer:
@@ -75,4 +75,4 @@ class Lexer:
 
             return (token_type, token, line, column)
         else:
-            raise LexerExcpetion(f"Unexpected character '{self.text[i]}' at line {line}, column {column}")
+            raise LexicalExcpetion(f"Unexpected character '{self.text[i]}' at line {line}, column {column}")

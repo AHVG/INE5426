@@ -1,0 +1,4 @@
+
+
+class LexicalExcpetion(Exception):
+    pass

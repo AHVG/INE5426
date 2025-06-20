@@ -1,4 +1,4 @@
-from compiler.compiler import Compiler
+from src.compiler import Compiler
 
 
 if __name__ == "__main__":
