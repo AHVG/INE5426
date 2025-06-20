@@ -17,12 +17,4 @@ class Compiler:
 
         self.lexer.start(program)
 
-        while True:
-            token = self.lexer.next_token()
-
-            if token is None:
-                break
-
-            token_type, lexeme, line, column = token
-            self.tokens.append((token_type, lexeme, line, column))
-            print(f"{token_type}: '{lexeme}' at line {line}, column {column}")
+        self.parser.parse()

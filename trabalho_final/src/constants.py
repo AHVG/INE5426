@@ -65,7 +65,7 @@ afd_blank = StateMachine(
 
 
 afd_ident = StateMachine(
-    name="ID",
+    name="IDENT",
     states=["q0", "q1"],
     initial_state="q0",
     accepting_states={"q1"},

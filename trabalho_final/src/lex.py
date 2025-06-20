@@ -21,7 +21,7 @@ class Lexer:
     def next_token(self):
         if self.finished or self.index >= len(self.text):
             self.finished = True
-            return None
+            return ("$", "EOF", self.line, self.column)
 
         i = self.index
         line = self.line
@@ -70,7 +70,7 @@ class Lexer:
             if token_type == "WS":
                 return self.next_token()  # Pula espaço e vai direto pro próximo
 
-            if token_type == "ID" and token in self.keywords:
+            if token_type == "IDENT" and token in self.keywords:
                 token_type = "KEYWORD"
 
             return (token_type, token, line, column)
