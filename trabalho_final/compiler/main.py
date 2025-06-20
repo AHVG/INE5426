@@ -1,9 +1,9 @@
-from compiler import Compiler
+from compiler.compiler import Compiler
 
 
 if __name__ == "__main__":
     program = '''
-    int a = 12 + 34;
+    int a = 12+34;
 
     def asdf() {
         float var=0.23;
@@ -24,4 +24,3 @@ if __name__ == "__main__":
 
     compiler = Compiler()
     compiler.compile(program)
-    
