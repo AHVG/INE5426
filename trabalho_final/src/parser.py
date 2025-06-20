@@ -29,17 +29,18 @@ class Parser:
 
             elif top == "$":
                 if token_type == "$":
-                    return  # sucesso
+                    return
                 else:
                     self.error("EOF", token_value, line, column)
 
             elif top in self.table:
-                entrada = token_value if token_value in self.table[top] else token_type.lower()
-                if entrada not in self.table[top]:
+                token = token_value if token_value in self.table[top] else token_type.lower()
+                if token not in self.table[top]:
                     self.error(f"um token válido para {top}", token_value, line, column)
 
-                producao = self.table[top][entrada]
-                for simbolo in reversed(producao):
+                production = self.table[top][token]
+
+                for simbolo in reversed(production):
                     stack.append(simbolo)
 
             elif top == token_value or top.lower() == token_type.lower():

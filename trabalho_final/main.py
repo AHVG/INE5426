@@ -9,7 +9,7 @@ if __name__ == "__main__":
     def main(int argv , string args) {
         int a;
         int b;
-        print b;
+        print b + a;
     }
     '''
 
