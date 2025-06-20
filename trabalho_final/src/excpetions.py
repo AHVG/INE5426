@@ -1,4 +1,4 @@
 
 
-class LexicalExcpetion(Exception):
+class LexicalError(Exception):
     pass

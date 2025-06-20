@@ -8,6 +8,8 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 from lxml import html
 
+from pprint import pprint
+
 
 def get_table_from_site():
     # 1. Configura navegador headless
@@ -85,5 +87,7 @@ def load_ll1_table_from_csv(caminho_csv):
     return tabela
 
 
-get_table_from_site()
-print(load_ll1_table_from_csv("ll1_gerada.csv"))
+# get_table_from_site()
+tabela = load_ll1_table_from_csv("ll1_gerada.csv")
+print("LL1_TABLE = ", end="")
+pprint(tabela, width=120, indent=4)

@@ -1,7 +1,7 @@
 import pytest
 
 from src.compiler import Compiler
-from src.excpetions import LexicalExcpetion
+from src.excpetions import LexicalError
 
 
 class TestCompiler:
@@ -16,7 +16,7 @@ class TestCompiler:
 
     def test_compile_an_incorrect_program(self):
         program = """float b = 0.0;\nint a = b;\na = 2a + b;"""
-        with pytest.raises(LexicalExcpetion) as exc_info:
+        with pytest.raises(LexicalError) as exc_info:
             Compiler().compile(program)
         
         assert str(exc_info.value) == "Unexpected character '2' at line 3, column 5"
