@@ -1,10 +1,9 @@
 import pytest
-from src.state_machine import StateMachine  # Ajuste o nome do módulo se necessário
+from src.state_machine import StateMachine
 
 class TestStateMachine:
     @pytest.fixture(autouse=True)
     def setup_machine(self):
-        # Executado antes de cada teste automaticamente
         self.machine = StateMachine(
             name="simple_id",
             states={"q0", "q1"},

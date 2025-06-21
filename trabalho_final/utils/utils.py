@@ -12,34 +12,34 @@ from pprint import pprint
 
 
 def get_table_from_site():
-    # 1. Configura navegador headless
     options = Options()
-    # options.add_argument("--headless")
+    options.add_argument("--headless")
     options.add_argument("--disable-gpu")
     service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service, options=options)
 
 
-    # 2. Vai para a página
+    # 1. Vai para a página
     url = "https://www.cs.princeton.edu/courses/archive/spring20/cos320/LL1/"
     driver.get(url)
 
     with open('gramatica.txt', 'r', encoding='utf-8') as f:
         grammar = f.read()
-    
+
+    # 2. Coloca a grámatica na área de texto
     textarea = driver.find_element(By.XPATH, '//*[@id="grammar"]')
     textarea.clear()
     textarea.send_keys(grammar)
 
-    # 4. Clica no botão para gerar a tabela
+    # 3. Clica no botão para gerar a tabela
     botao = driver.find_element(By.XPATH, '/html/body/div[2]/a')
     botao.click()
 
-    # 5. Espera a tabela aparecer
+    # 4. Espera a tabela aparecer
     driver.implicitly_wait(3)
     tabela = driver.find_element(By.XPATH, '/html/body/div[2]/table/tbody/tr/td[2]/table')
     
-    # 6. Converte o HTML da tabela em CSV
+    # 5. Converte o HTML da tabela em CSV
     html_str = tabela.get_attribute("outerHTML")
     tree = html.fromstring(html_str)
 
@@ -52,7 +52,7 @@ def get_table_from_site():
         cells = [td.text_content().strip() for td in tr.xpath('./td')]
         rows.append(cells)
 
-    # 7. Salva como CSV
+    # 6. Salva como CSV
     with open("ll1_gerada.csv", "w", newline='', encoding='utf-8') as f:
         writer = csv.writer(f)
         writer.writerow(headers)
@@ -66,15 +66,15 @@ def get_table_from_site():
 def load_ll1_table_from_csv(caminho_csv):
     with open(caminho_csv, newline='', encoding='utf-8') as f:
         leitor = csv.reader(f)
-        linhas = [linha for linha in leitor if any(c.strip() for c in linha)]  # remove linhas totalmente vazias
+        linhas = [linha for linha in leitor if any(c.strip() for c in linha)]
 
     terminais = [token.strip() for token in linhas[0][1:]]
     tabela = {}
 
-    for linha in linhas[1:]:  # agora não há mais necessidade de pular 2 em 2
+    for linha in linhas[1:]:
         nao_terminal = linha[0].strip()
         if not nao_terminal:
-            continue  # só por segurança: ignora se o primeiro campo estiver vazio
+            continue
 
         tabela[nao_terminal] = {}
 
