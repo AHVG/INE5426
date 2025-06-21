@@ -1,0 +1,22 @@
+def sum(int list, int size) {
+    int total;
+    total = 0;
+    int i;
+    for (i = 0; i < size; i = i + 1) {
+        total = total + list[i];
+    }
+    return total;
+}
+
+def main(int argv , string args) {
+    int size;
+    size = 10;
+    int list[10];
+    int i;
+    for (i = 0; i < size; i = i + 1) {
+        list[i] = i * i;
+    }
+    int ret;
+    ret = call sum(list, size);
+    print ret;
+}

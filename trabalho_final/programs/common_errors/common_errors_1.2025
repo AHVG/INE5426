@@ -1,0 +1,7 @@
+def main(int argv , string args) {
+    int a
+    int b;
+    print b + a;
+}
+
+SyntaxError at line 3, column 5: expected um token válido para VARDECL', got 'int'

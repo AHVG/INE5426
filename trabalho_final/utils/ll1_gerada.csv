@@ -38,11 +38,11 @@ RETURNSTAT,,,,,,,,,,,,,,,,,,,,,RETURNSTAT ::= return RETURNSTAT',,,,,,,,,,,,,,,,
 
 RETURNSTAT',,,RETURNSTAT' ::= EXPRESSION,RETURNSTAT' ::= EXPRESSION,,,,,,,,RETURNSTAT' ::= ε,,,RETURNSTAT' ::= EXPRESSION,,,,,,,,,,,,,,,RETURNSTAT' ::= EXPRESSION,RETURNSTAT' ::= EXPRESSION,,,,RETURNSTAT' ::= EXPRESSION,RETURNSTAT' ::= EXPRESSION,RETURNSTAT' ::= EXPRESSION
 
-IFSTAT,,,,,,,,,,,,,,,,,,,,,,IFSTAT ::= if ( EXPRESSION ) { STATEMENT } IFSTAT',,,,,,,,,,,,,,,
+IFSTAT,,,,,,,,,,,,,,,,,,,,,,IFSTAT ::= if ( EXPRESSION ) { STATELIST } IFSTAT',,,,,,,,,,,,,,,
 
 IFSTAT',IFSTAT' ::= ε,,IFSTAT' ::= ε,,,IFSTAT' ::= ε,IFSTAT' ::= ε,IFSTAT' ::= ε,IFSTAT' ::= ε,IFSTAT' ::= ε,,IFSTAT' ::= ε,IFSTAT' ::= ε,,,,,,IFSTAT' ::= ε,IFSTAT' ::= ε,IFSTAT' ::= ε,IFSTAT' ::= ε,IFSTAT' ::= else IFSTAT'',IFSTAT' ::= ε,,,,,,,,,,,,,
 
-IFSTAT'',,,,,,IFSTAT'' ::= { STATEMENT },,,,,,,,,,,,,,,,IFSTAT'' ::= IFSTAT,,,,,,,,,,,,,,,
+IFSTAT'',,,,,,IFSTAT'' ::= { STATELIST },,,,,,,,,,,,,,,,IFSTAT'' ::= IFSTAT,,,,,,,,,,,,,,,
 
 FORSTAT,,,,,,,,,,,,,,,,,,,,,,,,FORSTAT ::= for ( ATRIBSTAT ; EXPRESSION ; ATRIBSTAT ) STATEMENT,,,,,,,,,,,,,
 

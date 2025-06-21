@@ -1,0 +1,6 @@
+def main(int argv , string args) {
+    int a;
+    print c + a;
+}
+
+# Semantic Error: variable 'c' used before declaration

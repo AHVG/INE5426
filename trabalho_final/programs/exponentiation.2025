@@ -1,0 +1,23 @@
+def exp(float base, float exponent) {
+    int i;
+    float result;
+    result = 1.0;
+    if (exponent > 0.0) {
+        for (i = 0; i < exponent; i = i + 1) {
+            result = result * base;
+        }
+    } else {
+        exponent = -exponent;
+        for (i = 0; i < exponent; i = i + 1) {
+            result = result / base;
+        }
+    }
+    return result;
+}
+
+def main(int argv , string args) {
+    float result; float base; float exponent;
+    base = 10.0; exponent = 3.0;
+    result = call exp(base, exponent);
+    print result;
+}

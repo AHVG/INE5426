@@ -1,0 +1,31 @@
+def min(int a, int b) {
+    if (a < b) {
+        return a;
+    }
+    return b; 
+}
+
+def gcd(int a, int b) {
+    int min_number;
+    min_number = call min(a, b);
+    
+    int greatest_common_divisor; 
+    greatest_common_divisor = 1;
+
+    int i;
+    for (i = 1; i < min_number + 1; i = i + 1) {
+        if (a % i == 0) {
+            if (b % i == 0) {
+                greatest_common_divisor = i;
+            }
+        }
+    }
+    return greatest_common_divisor;
+}
+
+def main(int argv , string args) {
+    int a; int b;
+    a = 103; b = 877;
+    result = call gcd(a, b);
+    print result;
+}

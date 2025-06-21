@@ -1,0 +1,26 @@
+def euclides_gcd(int a, int b) {
+    int temp;
+    int i;
+
+    for (i = 0; i < 1000; i = i + 1) {
+        if (b == 0) {
+            break;
+        }
+        temp = b;
+        b = a % b;
+        a = temp;
+    }
+
+    return a;
+}
+
+def main(int argv, string args) {
+    int a;
+    int b;
+    int result;
+
+    a = 103;
+    b = 877;
+    result = call euclides_gcd(a, b);
+    print(result);
+}
